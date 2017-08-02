@@ -6,7 +6,8 @@ Mediante los Webhooks puedes recibir las notificaciones siguientes:
 >2. Una credencial ha sido actualizada.
 >3. Se han descargado nuevos movimientos de una credencial
 
-###/webhooks vía GET regresa webhooks para ese API KEY
+/webhooks vía GET regresa webhooks para un API KEY
+-------------------
 
 #### Autenticación
 
@@ -26,7 +27,8 @@ Mediante los Webhooks puedes recibir las notificaciones siguientes:
 | dt_create     | Timestamp    |  Tiempo en el que se creó esté registro  |
 | dt_modify     | Timestamp    |  Tiempo en el que se modificó esté registro  |
 
-###/webhooks vía POST crea un nuevo webhook
+/webhooks vía POST crea un nuevo webhook
+-------------------
 
 #### Autenticación
 
@@ -58,7 +60,8 @@ Mediante los Webhooks puedes recibir las notificaciones siguientes:
 | dt_modify     | Timestamp    |  Tiempo en el que se modificó esté registro  |
 
 
-###/webhooks/:id_webhook vía PUT actualiza un webhook
+/webhooks/:id_webhook vía PUT actualiza un webhook
+-------------------
 
 #### Autenticación
 
@@ -89,7 +92,8 @@ Mediante los Webhooks puedes recibir las notificaciones siguientes:
 | dt_create     | Timestamp    |  Tiempo en el que se creó esté registro  |
 | dt_modify     | Timestamp    |  Tiempo en el que se modificó esté registro  |
 
-###/webhooks/:id_webhook vía DELETE actualiza un webhook
+/webhooks/:id_webhook vía DELETE actualiza un webhook
+-------------------
 
 #### Autenticación
 
