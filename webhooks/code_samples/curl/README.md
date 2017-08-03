@@ -17,7 +17,7 @@ POST
 curl "https://sync.paybook.com/v1/webhooks" \
 -H "Authorization: api_key api_key=YOUR_API_KEY" \
 -H "Content-Type: application/json" \
--d '{"id_environment":"ID_ENVIRONMENT","url":"https://DOMAIN/my_webhook","events":["credential_create","credential_update","refresh"]}' \
+-d '{"id_environment":"ID_ENVIRONMENT","url":"https://WEBHOOK_DOMAIN/my_webhook","events":["credential_create","credential_update","refresh"]}' \
 -X POST
 ```
 
