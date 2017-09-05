@@ -1,0 +1,36 @@
+<html>
+<head>
+	<script> 
+
+	!function(w,d,s,id,r){ 
+	 w[r]={};  
+	 w[r]=w[r]||function(){w[r].q=w[r].q||[].push(arguments)}; 
+	 var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https'; 
+	 if(!d.getElementById(id)){ 
+	  js=d.createElement(s); 
+	  js.id=id; 
+	  // js.src=p+"://wwwdev.paybook.com/sync/widget/widget.js"; 
+	  js.src=p+"://www.paybook.com/sync/widget.js"; 
+	  fjs.parentNode.insertBefore(js,fjs); 
+	 } 
+	}(window,document,"script","sync-widget",'syncWidget'); 
+
+	var userDefinedCallback = function(response){
+		console.log("User defined callback");
+		console.log(JSON.stringify(response));
+	};//End of userDefinedCallback
+
+
+	syncWidget.options = {
+		token: "{TOKEN}",
+		quickAnswer : true,  // Ejecuta el callback cuando se logra acceder a la sesión del banco, no es necesario esperar a descargar toda la información
+		avoidAdmin : true,	// Si es "true", no te permitirá ir a la lista de cuentas agregadas después de agregar una cuenta.
+		callback : userDefinedCallback 
+	};
+
+	</script> 
+</head>
+
+<div id="sync_container" style="height: 800px;width: 600px;"></div> 
+
+</html>
