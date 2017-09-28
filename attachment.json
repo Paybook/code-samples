@@ -1,0 +1,145 @@
+{
+   "message" : null,
+   "rid" : "4cdddd56-fb77-4cd7-8479-3daf032a74a3",
+   "response" : {
+      "id_external" : null,
+      "id_attachment" : "57fd5b4124428305098b45bd",
+      "extra" : [
+         {
+            "a" : {
+               "VERSION" : "3.2",
+               "MONEDA" : "MXN",
+               "FOLIO" : "88",
+               "FECHA" : "2015-04-06T14:44:25",
+               "FORMADEPAGO" : "Pago en una sola exhibici�n",
+               "NUMCTAPAGO" : "******0424",
+               "XMLNS:CFDI" : "http://www.sat.gob.mx/cfd/3",
+               "SUBTOTAL" : "760.00",
+               "SELLO" : "hUmxdR2l0In5rIceNXSDkFVNPQIQNTqw4ykDmFmOWJjo2FD7oq5sipRD9f6xIabDNYhf86I7ursM6NwSc24qye9pzxJMdbPuJETuuh9pUT4aArShosGikQ7NF0v3zNFJGpUcfEiC7pIIKtMV1OJWzM9M3F0yCmtxff38eyI9Mb8=",
+               "CERTIFICADO" : "MIIEVzCCAz+gAwIBAgIUMDAwMDEwMDAwMDAzMDIxODczNTAwDQYJKoZIhvcNAQEFBQAwggGKMTgwNgYDVQQDDC9BLkMuIGRlbCBTZXJ2aWNpbyBkZSBBZG1pbmlzdHJhY2nDs24gVHJpYnV0YXJpYTEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMR8wHQYJKoZIhvcNAQkBFhBhY29kc0BzYXQuZ29iLm14MSYwJAYDVQQJDB1Bdi4gSGlkYWxnbyA3NywgQ29sLiBHdWVycmVybzEOMAwGA1UEEQwFMDYzMDAxCzAJBgNVBAYTAk1YMRkwFwYDVQQIDBBEaXN0cml0byBGZWRlcmFsMRQwEgYDVQQHDAtDdWF1aHTDqW1vYzEVMBMGA1UELRMMU0FUOTcwNzAxTk4zMTUwMwYJKoZIhvcNAQkCDCZSZXNwb25zYWJsZTogQ2xhdWRpYSBDb3ZhcnJ1YmlhcyBPY2hvYTAeFw0xNDAxMDMxNjE4MDRaFw0xODAxMDMxNjE4MDRaMIGjMRcwFQYDVQQDEw5FTkUgQUwgQ1VCTyBTQzEXMBUGA1UEKRMORU5FIEFMIENVQk8gU0MxFzAVBgNVBAoTDkVORSBBTCBDVUJPIFNDMSUwIwYDVQQtExxFQ1UwODA2MzAzOUEgLyBNT1JDNzgwNTExN0UzMR4wHAYDVQQFExUgLyBNT1JDNzgwNTExSENMTkRMMTcxDzANBgNVBAsTBk1BVFJJWjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAtE8COdHQ+3rrL82ywEZF6jK487HyMFWDCESn4w12IhuXTPtpVSncH1ytKLrxJryFGuXa5GfXamDqmaf3pLHo/zWizS1Nb4QLi6k8F2Mt+hY9B847X5FFUAtezwelVC9KiOD9pzcGTZKoW6mv2q8lKvYphimx7EkMie0PA0gT4m8CAwEAAaMdMBswDAYDVR0TAQH/BAIwADALBgNVHQ8EBAMCBsAwDQYJKoZIhvcNAQEFBQADggEBAKDvYIVKv2JVgUdQRmsYuAJ3cf/ERNuufe7PUdIKOxYwPgKQ5h/0YYK1QN25zTf8sqAgVxiOnE4dPtV/QYlMMYM0ClTAFqJ3tUjyIIMr7Zx0RAdDUSPkq5hSdyRyCOPj7M2yrpWs7GLsTMxTcnjhHbUI/SF/p9xL+EA0jVhHQpYa7DsI2Pik6n4sfu7XDRG+EeUu1snanjusXNA6VEV2SMxqFvpMqIkj0U6T3Zo/XMzTD51FAzmYfaz6DD29yBGbIXffz7mKbD6q2HiZowh9lDQjKtPwg4kaijwcBumD4RjSfQtJdcFaIFeg1eYVUVk4n9oElt5wtewZ+Eo5bjhz3is=",
+               "NOCERTIFICADO" : "00001000000302187350",
+               "XMLNS:XSI" : "http://www.w3.org/2001/XMLSchema-instance",
+               "METODODEPAGO" : "Transferencia bancaria",
+               "LUGAREXPEDICION" : "Saltillo, Coahuila de Zaragoza",
+               "XSI:SCHEMALOCATION" : "http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd",
+               "TIPODECOMPROBANTE" : "ingreso",
+               "TOTAL" : "881.60"
+            },
+            "c" : [
+               {
+                  "c" : [
+                     {
+                        "n" : "CFDI:DOMICILIOFISCAL",
+                        "a" : {
+                           "CALLE" : "Chapultepec",
+                           "NOEXTERIOR" : "399",
+                           "MUNICIPIO" : "Saltillo",
+                           "ESTADO" : "Coahuila de Zaragoza",
+                           "COLONIA" : "Los Angeles",
+                           "PAIS" : "M�xico",
+                           "CODIGOPOSTAL" : "25270"
+                        }
+                     },
+                     {
+                        "n" : "CFDI:REGIMENFISCAL",
+                        "a" : {
+                           "REGIMEN" : "R�gimen General de Ley Personas Morales"
+                        }
+                     }
+                  ],
+                  "a" : {
+                     "NOMBRE" : "Ene al Cubo S.C.",
+                     "RFC" : "ECU08063039A"
+                  },
+                  "n" : "CFDI:EMISOR"
+               },
+               {
+                  "n" : "CFDI:RECEPTOR",
+                  "c" : [
+                     {
+                        "n" : "CFDI:DOMICILIO",
+                        "a" : {
+                           "ESTADO" : "Nuevo Le�n",
+                           "COLONIA" : "Col. Del Valle",
+                           "PAIS" : "M�xico",
+                           "NOINTERIOR" : "Local 27",
+                           "NOEXTERIOR" : "350",
+                           "CODIGOPOSTAL" : "66220",
+                           "CALLE" : "Calzada del Valle Ote.",
+                           "MUNICIPIO" : "San Pedro Garza Garc�a"
+                        }
+                     }
+                  ],
+                  "a" : {
+                     "NOMBRE" : "CARIPEN, S.C.",
+                     "RFC" : "CAR121031C41"
+                  }
+               },
+               {
+                  "c" : [
+                     {
+                        "n" : "CFDI:CONCEPTO",
+                        "a" : {
+                           "DESCRIPCION" : "CUENTAS DE GOOGLE APPS ENTERPRISE",
+                           "UNIDAD" : "NO APLICA",
+                           "CANTIDAD" : "1.00",
+                           "NOIDENTIFICACION" : "1",
+                           "VALORUNITARIO" : "760.00",
+                           "IMPORTE" : "760.00"
+                        }
+                     }
+                  ],
+                  "n" : "CFDI:CONCEPTOS"
+               },
+               {
+                  "a" : {
+                     "TOTALIMPUESTOSTRASLADADOS" : "121.60"
+                  },
+                  "c" : [
+                     {
+                        "n" : "CFDI:TRASLADOS",
+                        "c" : [
+                           {
+                              "a" : {
+                                 "TASA" : "16.00",
+                                 "IMPUESTO" : "IVA",
+                                 "IMPORTE" : "121.60"
+                              },
+                              "n" : "CFDI:TRASLADO"
+                           }
+                        ]
+                     }
+                  ],
+                  "n" : "CFDI:IMPUESTOS"
+               },
+               {
+                  "n" : "CFDI:COMPLEMENTO",
+                  "c" : [
+                     {
+                        "n" : "TFD:TIMBREFISCALDIGITAL",
+                        "a" : {
+                           "UUID" : "00ADB8A0-7BAB-4A51-9CD1-12B912FAF676",
+                           "NOCERTIFICADOSAT" : "00001000000203495276",
+                           "VERSION" : "1.0",
+                           "SELLOSAT" : "yL6LrwjVESsIXOg2zK9+Xa31QNzw3zmKdg6joY1ePVwPJPnYshyX8MaA34gebTAbadLil2hAGfj/mvH0T1lae9lFVImmF+fHC8HQJzpNSLXKUBAQcy6q0a+ELcX2Ovavp/YhdlLqPKajDx9cS/xK75vg9Gw33aVHKJIEO3dwsIo=",
+                           "XMLNS:TFD" : "http://www.sat.gob.mx/TimbreFiscalDigital",
+                           "XSI:SCHEMALOCATION" : "http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/TimbreFiscalDigital/TimbreFiscalDigital.xsd",
+                           "FECHATIMBRADO" : "2015-04-06T14:44:26",
+                           "SELLOCFD" : "hUmxdR2l0In5rIceNXSDkFVNPQIQNTqw4ykDmFmOWJjo2FD7oq5sipRD9f6xIabDNYhf86I7ursM6NwSc24qye9pzxJMdbPuJETuuh9pUT4aArShosGikQ7NF0v3zNFJGpUcfEiC7pIIKtMV1OJWzM9M3F0yCmtxff38eyI9Mb8="
+                        }
+                     }
+                  ]
+               }
+            ],
+            "n" : "CFDI:COMPROBANTE"
+         }
+      ],
+      "mime" : "text/xml",
+      "file" : "00ADB8A07BAB4A519CD112B912FAF676.xml",
+      "id_user" : "583db8180c212a80048b686d",
+      "is_valid" : 1
+   },
+   "status" : true,
+   "errors" : null,
+   "code" : 200
+}
