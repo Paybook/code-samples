@@ -2,35 +2,35 @@
 <head>
 	<script> 
 
-    !function(w,d,s,id,r){
-        var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";
-        if(!d.getElementById(id)){
-            w[r]={};
-            w[r]=w[r]||function(){w[r].q=w[r].q||[].push(arguments)};
-            js=d.createElement(s);
-            js.id=id;
-            js.type = 'text/javascript';
-            js.src=p+"://www.paybook.com/sync/widget.js";
-            fjs.parentNode.insertBefore(js,fjs);
-        }
-    }(window,document,"script","sync-widget", "syncWidget");
+	!function(w,d,s,id,r){
+		var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";
+		if(!d.getElementById(id)){
+			w[r]={};
+			w[r]=w[r]||function(){w[r].q=w[r].q||[].push(arguments)};
+			js=d.createElement(s);
+			js.id=id;
+			js.type = 'text/javascript';
+			js.src=p+"://www.paybook.com/sync/widget.js";
+			fjs.parentNode.insertBefore(js,fjs);
+		}
+	}(window,document,"script","sync-widget", "syncWidget");
 
-    var userDefinedCallback = function(response){
+	var userDefinedCallback = function(response){
 		console.log("User defined callback");
 		console.log(JSON.stringify(response));
 	};//End of userDefinedCallback
 	
-	var token = "{SESSION_TOKEN}";
+	var token = "{{SESSION_TOKEN}}";
 
-    syncWidget.options = {
-    	token: token, 
-    	baseDiv: "sync_container", 
-    	theme: "light", 
-    	avoidAdmin: true,
-    	callback : userDefinedCallback,
+	syncWidget.options = {
+		token: token, 
+		baseDiv: "sync_container", 
+		theme: "light", 
+		avoidAdmin: true,
+		callback : userDefinedCallback,
 		inc : ['56cf5728784806f72b8b456b']
-    };
-    if (typeof syncWidget.setToken === "function") {syncWidget.setToken(token)} 
+	};
+	if (typeof syncWidget.setToken === "function") {syncWidget.setToken(token)} 
 
 	</script> 
 </head>
