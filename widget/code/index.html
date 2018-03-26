@@ -2,33 +2,35 @@
 <head>
 	<script> 
 
-	!function(w,d,s,id,r){ 
-	 w[r]={};  
-	 w[r]=w[r]||function(){w[r].q=w[r].q||[].push(arguments)}; 
-	 var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https'; 
-	 if(!d.getElementById(id)){ 
-	  js=d.createElement(s); 
-	  js.id=id; 
-	  // js.src=p+"://wwwdev.paybook.com/sync/widget/widget.js"; 
-	  js.src=p+"://www.paybook.com/sync/widget.js"; 
-	  fjs.parentNode.insertBefore(js,fjs); 
-	 } 
-	}(window,document,"script","sync-widget",'syncWidget'); 
+	!function(w,d,s,id,r){
+		var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";
+		if(!d.getElementById(id)){
+			w[r]={};
+			w[r]=w[r]||function(){w[r].q=w[r].q||[].push(arguments)};
+			js=d.createElement(s);
+			js.id=id;
+			js.type = 'text/javascript';
+			js.src=p+"://www.paybook.com/sync/widget.js";
+			fjs.parentNode.insertBefore(js,fjs);
+		}
+	}(window,document,"script","sync-widget", "syncWidget");
 
 	var userDefinedCallback = function(response){
 		console.log("User defined callback");
 		console.log(JSON.stringify(response));
 	};//End of userDefinedCallback
-
+	
+	var token = "";
 
 	syncWidget.options = {
-		token: "{TOKEN}",
-		quickAnswer : true,  // Ejecuta el callback cuando se logra acceder a la sesión del banco, no es necesario esperar a descargar toda la información
-		avoidAdmin : true,	// Si es "true", no te permitirá ir a la lista de cuentas agregadas después de agregar una cuenta.
+		token: token, 
+		baseDiv: "sync_container", 
+		theme: "light", 
+		avoidAdmin: true,
 		callback : userDefinedCallback,
-		inc : ['{ID_SITE}']
+		inc : []
 	};
-
+	if (typeof syncWidget.setToken === "function") {syncWidget.setToken(token)} 
 
 	</script> 
 </head>
