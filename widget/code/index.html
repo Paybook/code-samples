@@ -20,18 +20,17 @@
 		console.log(JSON.stringify(response));
 	};//End of userDefinedCallback
 	
-	var token = "";
+	var token = "{TOKEN}";
 
 	syncWidget.options = {
 		token: token, 
 		baseDiv: "sync_container", 
 		theme: "light", 
 		avoidAdmin: true,
-		callback : userDefinedCallback,
-		inc : []
+		callback : userDefinedCallback
 	};
 	if (typeof syncWidget.setToken === "function") {syncWidget.setToken(token)} 
-
+		
 	</script> 
 </head>
 
