@@ -58,6 +58,9 @@ REFRESH
         ], 
         "transactions": [
             "/v1/transactions?id_credential=ID_CREDENTIAL&limit=5000&skip=0"
+        ],
+        "attachments": [
+            "/v1/attachments?id_credential=ID_CREDENTIAL&limit=5000&skip=0"
         ]
     }, 
     "event": "refresh", 
