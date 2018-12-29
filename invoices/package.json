@@ -1,0 +1,11 @@
+{
+  "name": "invoices",
+  "version": "0.0.1",
+  "description": "Examples for Paybook Sync Invoices",
+  "main": "main.js",
+  "author": "mateo@paybook.com",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
