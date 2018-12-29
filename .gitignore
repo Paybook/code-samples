@@ -1,2 +1,6 @@
 .DS_Store
 *.pyc
+
+.DS_Store
+package-lock.json
+node-modules
