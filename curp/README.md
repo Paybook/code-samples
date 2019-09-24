@@ -394,7 +394,7 @@ Se puede utilizar la página https://www.freeformatter.com/base64-encoder.html p
 }
 ```
 
-Content codicicado de CURP JSON
+Content codificado de CURP JSON
 
 ```json
 {
