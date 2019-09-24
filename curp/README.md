@@ -15,7 +15,13 @@
 
 ## Integración
 
-### Paso 0 (Definición de variables en Postman)
+### Paso 0 (Postman)
+
+##### Paso 0.1 Importar colección
+
+[Colección de peticiones para CURP](https://github.com/Paybook/code-samples/tree/master/curp/postman)
+
+##### Paso 0.2 Definición de variables en Postman
 
 | **Variable**            | **Descripción**                                              |
 | ----------------------- | ------------------------------------------------------------ |
