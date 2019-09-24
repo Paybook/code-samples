@@ -10,8 +10,8 @@
 ## Herramientas de testing
 
 - Postman (https://www.getpostman.com/)
-- ngrok (https://ngrok.com/)
-- Rutina para manejo de peticiones
+- ngrok ([https://ngrok.com/](https://ngrok.com/))
+- Rutina para manejo de peticiones en Webhook  ([Ejemplo Python 2.7](https://github.com/Paybook/code-samples/tree/master/curp/webhook/python2.7))
 
 ## Integración
 
@@ -38,7 +38,7 @@ Se requiere un endpoint público del lado del usuario donde Paybook Sync pueda e
 Petición:
 
 ```bash
-curl "[WEBHOOK_URI]" \
+curl "{{app_webhook_url}}" \
 -X POST \ 
 -H "Content-type:application/json" \
 -d '{"event":"documents_completed"}'
@@ -54,10 +54,10 @@ Petición:
 
 ```bash
 curl "https://sync.paybook.com/v1/webhooks" \
--H "Authorization: api_key api_key=[API_KEY]" \
+-H "Authorization: api_key api_key={{sync_api_key}}" \
 -X POST \
 -H "Content-Type: application/json" \
--d '{"url":"[WEBHOOK_URI]","events":["documents_completed"]}'
+-d '{"url":"{{app_webhook_url}}","events":["documents_completed"]}'
 ```
 
 Respuesta:
@@ -75,7 +75,7 @@ Respuesta:
         "events": [
             "documents_completed"
         ],
-        "url": "WEBHOOK_URL",
+        "url": "app_webhook_url",
         "delay": 0,
         "dt_created": "DT_CREATE_UNIXTIME",
         "dt_modified": null
@@ -105,11 +105,11 @@ Petición:
 
 ```bash
 curl "https://sync.paybook.com/v1/users" \
--H "Authorization: api_key api_key=[API_KEY]" \
+-H "Authorization: api_key api_key={{sync_api_key}}" \
 -X POST \
 -H "Content-Type: application/json" \
 -d '{
-  "name":"[USERNAME]"
+  "name":"{{sync_username}}"
 }'
 ```
 
@@ -125,7 +125,7 @@ Respuesta:
     "response": {
         "id_user": "USER_ID",
         "id_external": null,
-        "name": "USERNAME",
+        "name": "sync_username",
         "dt_create": "DT_CREATE_UNIXTIME",
         "dt_modify": null
     }
@@ -150,7 +150,7 @@ Petición:
 
 ```bash
 curl "https://sync.paybook.com/v1/sessions" \
--H "Authorization: api_key api_key=[API_KEY], id_user=[ID_USER]" \
+-H "Authorization: api_key api_key={{sync_api_key}}, id_user={{sync_id_user}}" \
 -X POST \
 -H "Content-Type: application/json" 
 ```
@@ -189,7 +189,7 @@ Petición:
 ```bash
 curl -X POST \
   https://sync.paybook.com/v1/jobs \
-  -H 'Authorization: Bearer [TOKEN]' \
+  -H 'Authorization: Bearer {{sync_token}}' \
   -H 'Content-Type: application/json' \
   -d '{"id_site" : "5d4b57e7f9de2a0ad215fba2","input" : {"type" : "datos","names" : "[nombre]","firstLastname" : "[primer apellido]","secondLastname" : "[segundo apellido]","bornDay" : "[día de nacimiento]","bornMonth" : "[mes de nacimiento]","bornYear" : "[año de nacimiento]","gender" : "[género]","entityCode" : "[código de entidad]"}}'
 ```
@@ -201,7 +201,7 @@ Petición:
 ```
 curl -X POST \
   https://sync.paybook.com/v1/jobs \
-  -H 'Authorization: Bearer [TOKEN]' \
+  -H 'Authorization: Bearer {{sync_token}}' \
   -H 'Content-Type: application/json' \
   -d '{
 	"id_site" : "5d4b57e7f9de2a0ad215fba2",
@@ -311,7 +311,7 @@ Petición:
 
 ```bash
 curl "https://sync.paybook.com/v1/webhooks/events/WEBHOOK_UUID/documents?limit=1000&skip=0" \
--H "Authorization: Bearer [TOKEN]" \
+-H "Authorization: Bearer {{sync_token}}" \
 -X GET
 ```
 
