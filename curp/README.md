@@ -197,7 +197,7 @@ curl -X POST \
   https://sync.paybook.com/v1/jobs \
   -H 'Authorization: Bearer {{sync_token}}' \
   -H 'Content-Type: application/json' \
-  -d '{"id_site" : "5d4b57e7f9de2a0ad215fba2","input" : {"type" : "datos","names" : "[nombre]","firstLastname" : "[primer apellido]","secondLastname" : "[segundo apellido]","bornDay" : "[día de nacimiento]","bornMonth" : "[mes de nacimiento]","bornYear" : "[año de nacimiento]","gender" : "[género]","entityCode" : "[código de entidad]"}}'
+  -d '{"id_site" : "5d4b57e7f9de2a0ad215fba2","input_name":"personal_data","input" : {"names" : "[nombre]","firstLastname" : "[primer apellido]","secondLastname" : "[segundo apellido]","bornDay" : "[día de nacimiento]","bornMonth" : "[mes de nacimiento]","bornYear" : "[año de nacimiento]","gender" : "[género]","entityCode" : "[código de entidad]"}}'
 ```
 
 #### Tipo: “curp”, solicitar la validación de la CURP así como la obtención de los datos personales
@@ -211,8 +211,8 @@ curl -X POST \
   -H 'Content-Type: application/json' \
   -d '{
 	"id_site" : "5d4b57e7f9de2a0ad215fba2",
+  "input_name":"Default",
 	"input" : {
-		"type" : "curp",
 		"curp" : "[CURP]"
 	}
 }'
