@@ -5,7 +5,7 @@
 - Pipenv (Optional)
 
 ### Ejecutar
-
+***Sin pipenv:***
 ```bash
 pip install flask
 FLASK_APP=main_webhook.py FLASK_DEBUG=1 FLASK_ENV=development flask run --host=0.0.0.0 --port=5001
@@ -15,4 +15,10 @@ FLASK_APP=main_webhook.py FLASK_DEBUG=1 FLASK_ENV=development flask run --host=0
 ```bash
 pipenv install
 pipenv shell FLASK_APP=main_webhook.py FLASK_DEBUG=1 FLASK_ENV=development flask run --host=0.0.0.0 --port=5001
+```
+
+***Ejecutar ngrok*** (independiente si usas pipenv o no)
+En otra ventana de terminal:
+```bash
+ngrok http 5001
 ```
