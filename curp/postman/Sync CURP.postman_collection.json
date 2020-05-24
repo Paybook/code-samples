@@ -332,5 +332,49 @@
 			"response": []
 		}
 	],
+	"variable": [
+		{
+			"id": "b9d9bcc5-cb6f-40ab-80b0-a67ef8ed48bb",
+			"key": "sync_api_key",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "3fbcd76f-cd01-43ce-ae7c-e97cfc357dd2",
+			"key": "app_webhook_url",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "74467b4c-0dfb-40bd-9410-423ed051647d",
+			"key": "sync_id_curp_site",
+			"value": "5d4b57e7f9de2a0ad215fba2",
+			"type": "string"
+		},
+		{
+			"id": "4736f04c-cf3c-4804-9b8c-e29e3bcdc783",
+			"key": "sync_username",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "4edb3b4b-e9cc-4e0a-b3e7-0fba3039d117",
+			"key": "sync_id_user",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "3a3b070f-3629-4a2a-8c62-9bb9b07b238e",
+			"key": "sync_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "8ad06799-e3bf-46ef-b94c-b25cc6936c7f",
+			"key": "sync_documents_endpoint",
+			"value": "",
+			"type": "string"
+		}
+	],
 	"protocolProfileBehavior": {}
 }
