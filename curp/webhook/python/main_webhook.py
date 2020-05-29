@@ -9,7 +9,7 @@ def webhook():
 	print(json.dumps(body, indent=4, sort_keys=True))
 
 	result = {
-		'handshake': "xxx-xxx-xxx"
+		'response': "HTTP Response Code 200."
 	}
 
 	return jsonify(result)
