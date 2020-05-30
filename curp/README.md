@@ -1,27 +1,57 @@
+# CURP - RENAPO
 
-
-
-
+- [Requisitos](#requisitos)        
+    - [Requisitos Opcionales](#requisitos-opcionales)    
+- [Herramientas de testing](#herramientas-de-testing)    
+- [Primeros Pasos](#primeros-pasos)        
+    - [Paso 1: Configurar Postman](#paso-1-configurar-postman)                
+        - [Importar colección](#importar-colección)                
+        - [Variables de la colección en Postman](#variables-de-la-colección-en-postman)            
+        - [Declara tu API KEY en Postman](#declara-tu-api-key-en-postman)        
+    - [Paso 2: Configuración de WEBHOOK](#paso-2-configuración-de-webhook)            
+        - [Paso 2.1 Validar funcionamiento de tu Endpoint](#paso-21-validar-funcionamiento-de-tu-endpoint)                
+        - [Paso 2.2 Listado de Webhooks actuales](#paso-22-listado-de-webhooks-actuales)                
+        - [Paso 2.3 Dar de alta el Webhook en Sync](#paso-23-dar-de-alta-el-webhook-en-sync)        
+    - [Paso 3 (Flujo). Registrar un usuario](#paso-3-flujo-registrar-un-usuario)        
+    - [Paso 4 (Flujo). Crear Sesión](#paso-4-flujo-crear-sesión)        
+    - [Paso 5 (Flujo). Generar la solicitud de descarga/validación de CURP](#paso-5-flujo-generar-la-solicitud-de-descargavalidación-de-curp)            
+        - [1. Tipo: ”datos”, solicitar la CURP a partir de los datos personales.](#1-tipo-datos-solicitar-la-curp-a-partir-de-los-datos-personales)            
+        - [2. Tipo: “curp”, solicitar la validación de la CURP así como la obtención de los datos personales](#2-tipo-curp-solicitar-la-validación-de-la-curp-así-como-la-obtención-de-los-datos-personales)
+        - [Códigos de genero](#códigos-de-genero)                
+        - [Códigos de entidad](#códigos-de-entidad)        
+    - [Paso 6 (Flujo). Procesar mensajes](#paso-6-flujo-procesar-mensajes)        
+    - [Paso 7. (Descarga de Documentos)](#paso-7-descarga-de-documentos)        
+    - [Ejemplos](#ejemplos)            
+        - [Ejemplos de Documento CURP JSON](#ejemplos-de-documento-curp-json)            
+        - [Ejemplo de Documento CURP PDF](#ejemplo-de-documento-curp-pdf)
 ## Requisitos
 
 - API KEY
 - WEBHOOK
 
+### Requisitos Opcionales
+- [pipenv]
+- [dotenv]
+
 ## Herramientas de testing
 
-- Postman (https://www.getpostman.com/)
-- ngrok ([https://ngrok.com/](https://ngrok.com/))
-- Rutina para manejo de peticiones en Webhook  ([Ejemplo Python 2.7](https://github.com/Paybook/code-samples/tree/master/curp/webhook/python2.7))
+- [Postman](https://www.getpostman.com/)
+- [ngrok]
+- Rutina para manejo de peticiones en Webhook: [Ejemplo Python](https://github.com/Paybook/code-samples/tree/master/curp/webhook/python)
 
-## Integración
+## Primeros Pasos
 
-### Paso 0 (Postman)
+### Paso 1: Configurar Postman
 
-##### Paso 0.1 Importar colección
-
+##### Importar colección
+Importa la siguiente colección a postman
 [Colección de peticiones para CURP](https://github.com/Paybook/code-samples/tree/master/curp/postman)
 
-##### Paso 0.2 Definición de variables en Postman
+Ahora tienes listos los request que usaremos así como las variables que la colección ocupa para cada uno de los request.
+
+Las variables se explican a continuación.
+
+##### Variables de la colección en Postman
 
 | **Variable**            | **Descripción**                                              |
 | ----------------------- | ------------------------------------------------------------ |
@@ -33,40 +63,69 @@
 | sync_token              | Token de sesión de usuario                                   |
 | sync_documents_endpoint | Endpoint para descargar los documentos obtenidos por el servicio |
 
+#### Declara tu API KEY en Postman
 
+Ahora establece tu API KEY en el valor inicial y actual de la varible ***sync_api_key*** en la colección ***Sync CURP*** > ... > Edit > Variables <br>
+Por el momento no es necesario definir las otras variables, lo haremos más adelante (algunas de ellas se definen automaticamente tras ejecutar un request)
 
-### Paso 1 (Configuración)
+### Paso 2: Configuración de WEBHOOK
 
-Se requiere un endpoint público del lado del usuario donde Paybook Sync pueda enviar mensajes que representen el estado de la solicitud de la CURP. El endpoint deberá manejar el mensaje que Paybook Sync le envía con la información para la descarga del documento
+El webhook requiere de un endpoint público del lado de quien implementa. En este endpoint Paybook Sync envia peticiones HTTP POST que contienen el estado de la solicitud de la CURP. La lógica dentro del endpoint deberá manejar el mensaje que Paybook Sync le envía con la información para la descarga del documento.
 
-##### Paso 1.1 Validar funcionamiento de Webhook
+Puedes usar el template que te proporcionamos [aquí](https://github.com/Paybook/code-samples/tree/master/curp/webhook/) donde encontraras instrucciones para crear un endpoint de manera local y hacerlo público con [ngrok] para que puedas recibir las peticiones desde Paybook Sync.
+
+#### Paso 2.1 Validar funcionamiento de tu Endpoint
+Prueba que tu endpoint pueda procesar peticiones.
+**Con cURL:**
+```bash
+curl "http://<your_ngrok_id>.ngrok.io/my_webhook"  -X POST   -H "Content-type:application/json"  -d '{"event":"documents_completed"}'
+```
+
+**Respuesta:**
+`HTTP Response Code 200.`
+
+##### Paso 2.2 Listado de Webhooks actuales
+
+**Con Postman:**
+
+Una vez establecido nuestro API KEY en las variables de coleción de nuestra recien importada colección procedemos a ejecutar ***Get Webhooks***.
+
+**Respuesta:**
+```json
+{
+    "rid": "REQUEST_ID",
+    "code": 200,
+    "errors": null,
+    "status": true,
+    "message": null,
+    "response": []
+}
+```
+> Es normal que la respuesta este vacia ya que hasta este momento no tenemos ningun webhook creado.
+
+**Con cURL:**
+```bash
+curl --location --request GET 'https://sync.paybook.com/v1/webhooks' \
+--header 'Authorization: api_key api_key=<TU_API_KEY>' \
+-H 'Content-Type: application/json'
+```
+
+##### Paso 2.3 Dar de alta el Webhook en Sync
+
+**Con Postman:**
+
+Ahora establece el nombre del usuario en el valor actual de la varible ***app_webhook_url*** en la colección ***Sync CURP*** > ... > Edit > Variables <br>
+Una vez hecho lo anterior, ejecuta la petición: ***Creates Webhook***
+
+**Con cURL:**
 
 Petición:
 
 ```bash
-curl "{{app_webhook_url}}" \
--X POST \ 
--H "Content-type:application/json" \
--d '{"event":"documents_completed"}'
+curl "https://sync.paybook.com/v1/webhooks" -H "Authorization: api_key api_key=<TU_API_KEY>" -X POST -H "Content-Type: application/json" -d '{"url":"http://<tu_ngrok_id>.ngrok.io/my_webhook","events":["documents_completed"]}'
 ```
 
-Respuesta:
-
-HTTP Response Code 200.
-
-##### Paso 1.2 Dar de alta el Webhook en Sync
-
-Petición:
-
-```bash
-curl "https://sync.paybook.com/v1/webhooks" \
--H "Authorization: api_key api_key={{sync_api_key}}" \
--X POST \
--H "Content-Type: application/json" \
--d '{"url":"{{app_webhook_url}}","events":["documents_completed"]}'
-```
-
-Respuesta:
+**Respuesta:**
 
 ```json
 {
@@ -81,7 +140,7 @@ Respuesta:
         "events": [
             "documents_completed"
         ],
-        "url": "app_webhook_url",
+        "url": "http://<your_ngrok_id>.ngrok.io/my_webhook",
         "delay": 0,
         "dt_created": "DT_CREATE_UNIXTIME",
         "dt_modified": null
@@ -89,7 +148,32 @@ Respuesta:
 }
 ```
 
+Puedes volver a verificar la lista de webhooks como en el [paso 2.2](#paso-2.2-listado-de-webhooks-actuales) y veras una respuesta como esta
 
+```json
+{
+    "rid": "REQUEST_ID",
+    "code": 200,
+    "errors": null,
+    "status": true,
+    "message": null,
+    "response": [
+        {
+            "id_webhook": "WEBHOOK_ID",
+            "id_user": null,
+            "is_disabled": 0,
+            "events": [
+                "documents_completed"
+            ],
+            "url": "http://c97a8cb8799d.ngrok.io/my_webhook",
+            "delay": 0,
+            "ct_failed": 0,
+            "dt_created": "DT_CREATE_UNIXTIME",
+            "dt_modified": null
+        }
+    ]
+}
+```
 
 | **Campo**   | **Descripción**                                              |
 | ----------- | ------------------------------------------------------------ |
@@ -102,24 +186,23 @@ Respuesta:
 | dt_modified | Fecha de modificación del webhook                            |
 
 
+### Paso 3 (Flujo). Registrar un usuario
 
-### Paso 2 (Flujo). Registrar un usuario
+Por cada usuario que interactúa con el cliente que consume los servicios de Sync se deberá registrar un Usuario de Sync. 
 
-Por cada usuario del cliente que interactúa con los servicios de Sync se deberá registrar un Usuario de Sync. 
+**Con Postman:**
 
+Ahora establece el nombre del usuario en el valor actual de la varible ***sync_username*** en la colección ***Sync CURP*** > ... > Edit > Variables <br>
+Una vez hecho lo anterior, ejecuta la petición: ***Creates a new user***
+
+**Con cURL:**
 Petición:
 
 ```bash
-curl "https://sync.paybook.com/v1/users" \
--H "Authorization: api_key api_key={{sync_api_key}}" \
--X POST \
--H "Content-Type: application/json" \
--d '{
-  "name":"{{sync_username}}"
-}'
+curl "https://sync.paybook.com/v1/users" -H "Authorization: api_key api_key=<TU_API_KEY>" -X POST  -H "Content-Type: application/json" -d '{"name":"<username>"}'
 ```
 
-Respuesta:
+**Respuesta:**
 
 ```json
 {
@@ -148,17 +231,19 @@ Respuesta:
 
 
 
-### Paso 3 (Flujo). Crear Sesión
+### Paso 4 (Flujo). Crear Sesión
 
 Por seguridad se recomienda generar un token de sesión para realizar las operaciones de usuario.
 
+**Con Postman:**
+
+Ejecuta la petición: ***Init Session***
+
+**Con cURL:**
 Petición:
 
 ```bash
-curl "https://sync.paybook.com/v1/sessions" \
--H "Authorization: api_key api_key={{sync_api_key}}, id_user={{sync_id_user}}" \
--X POST \
--H "Content-Type: application/json" 
+curl "https://sync.paybook.com/v1/sessions" -H "Authorization: api_key api_key=<TU_API_KEY>, id_user=<id_user>" -X POST -H "Content-Type: application/json" 
 ```
 
 Respuesta:
@@ -171,9 +256,7 @@ Respuesta:
     "status": true,
     "message": null,
     "response": {
-        "token": "TOKEN",
-        "key": "KEY",
-        "iv": "IV"
+        "token": "TOKEN"
     }
 }
 ```
@@ -184,38 +267,34 @@ Respuesta:
 
 
 
-### Paso 4 (Flujo). Generar la solicitud de descarga/validación de CURP
+### Paso 5 (Flujo). Generar la solicitud de descarga/validación de CURP
 
 Pueden enviarse dos tipos de solicitudes
 
-#### Tipo: ”datos”, solicitar la CURP a partir de los datos personales. 
+#### 1. Tipo: ”datos”, solicitar la CURP a partir de los datos personales. 
+
+**Con Postman:**
+
+En la petición ***Create a new job for CURP from personal data*** sustituye los valores de la información personal en el body de la petición y ejecutala. 
+
+**Con cURL:**
 
 Petición:
-
 ```bash
-curl -X POST \
-  https://sync.paybook.com/v1/jobs \
-  -H 'Authorization: Bearer {{sync_token}}' \
-  -H 'Content-Type: application/json' \
-  -d '{"id_site" : "5d4b57e7f9de2a0ad215fba2","input_name":"personal_data","input" : {"names" : "[nombre]","firstLastname" : "[primer apellido]","secondLastname" : "[segundo apellido]","bornDay" : "[día de nacimiento]","bornMonth" : "[mes de nacimiento]","bornYear" : "[año de nacimiento]","gender" : "[género]","entityCode" : "[código de entidad]"}}'
+curl -X POST https://sync.paybook.com/v1/jobs -H 'Authorization: Bearer {{sync_token}}' -H 'Content-Type: application/json' -d '{"id_site" : "5d4b57e7f9de2a0ad215fba2","input_name":"personal_data","input" : {"names" : "[nombre]","firstLastname" : "[primer apellido]","secondLastname" : "[segundo apellido]","bornDay" : "[día de nacimiento]","bornMonth" : "[mes de nacimiento]","bornYear" : "[año de nacimiento]","gender" : "[género]","entityCode" : "[código de entidad]"}}'
 ```
 
-#### Tipo: “curp”, solicitar la validación de la CURP así como la obtención de los datos personales
+#### 2. Tipo: “curp”, solicitar la validación de la CURP así como la obtención de los datos personales
+
+**Con Postman:**
+
+En la petición ***Create a new job for CURP from CURP*** sustituye el valor de CURP en el body de la petición y ejecutala. 
+
+**Con cURL:**
 
 Petición:
-
 ```
-curl -X POST \
-  https://sync.paybook.com/v1/jobs \
-  -H 'Authorization: Bearer {{sync_token}}' \
-  -H 'Content-Type: application/json' \
-  -d '{
-	"id_site" : "5d4b57e7f9de2a0ad215fba2",
-  "input_name":"Default",
-	"input" : {
-		"curp" : "[CURP]"
-	}
-}'
+curl -X POST https://sync.paybook.com/v1/jobs -H 'Authorization: Bearer {{sync_token}}' -H 'Content-Type: application/json' -d '"id_site":"5d4b57e7f9de2a0ad215fba2", "input_name":"Default", "input" : { "curp" : "[CURP]" }}'
 ```
 
 Respuesta:
@@ -246,7 +325,7 @@ Es posible monitorear el estado de la solicitud mediante un cliente WebSocket o 
 | ws          | URI para monitorear la solicitud con cliente WebSocket |
 | status      | URI para monitorear la solicitud con HTTPS GET Request |
 
-##### Códigos de entidad
+##### Códigos de genero
 
 | Código | Descripción |
 | ------ | ----------- |
@@ -277,7 +356,7 @@ Es posible monitorear el estado de la solicitud mediante un cliente WebSocket o 
 
 
 
-### Paso 5 (Flujo). Procesar mensajes
+### Paso 6 (Flujo). Procesar mensajes
 
 Cuando el proceso creado ha descargado documentos, se enviará un mensaje al webhook del desarrollador con la siguiente estructura:
 
@@ -311,14 +390,20 @@ Cuando el proceso creado ha descargado documentos, se enviará un mensaje al web
 
 
 
-### Paso 6. (Descarga de Documentos)
+### Paso 7. (Descarga de Documentos)
+
+**Con Postman:**
+
+Ahora establece el endpoint a consultar (Recibido en el paso anterior) en el valor actual de la varible ***sync_documents_endpoint*** en la colección ***Sync CURP*** > ... > Edit > Variables <br>
+Despues ejecuta la petición ***Download PDF Document*** 
+
+
+**Con cURL:**
 
 Petición:
 
 ```bash
-curl "https://sync.paybook.com/v1/webhooks/events/WEBHOOK_UUID/documents?limit=1000&skip=0" \
--H "Authorization: Bearer {{sync_token}}" \
--X GET
+curl "https://sync.paybook.com/v1/webhooks/events/WEBHOOK_UUID/documents?limit=1000&skip=0" -H "Authorization: Bearer {{sync_token}}" -X GET
 ```
 
 Respuesta:
@@ -433,3 +518,11 @@ Content codificado de CURP JSON
 }
 ```
 
+[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen)
+
+[Paybook Sync]: <https://www.paybook.com/sync/es/>
+[sync-py]: <https://github.com/Paybook/sync-py>
+[dotenv]: <https://pypi.org/project/python-dotenv/>
+[Pipenv]: <https://github.com/pypa/pipenv)>
+
+[ngrok]: <https://ngrok.com/>
