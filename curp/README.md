@@ -32,7 +32,7 @@
 
 - [Postman](https://www.getpostman.com/)
 - [ngrok]
-- Rutina para manejo de peticiones en Webhook: [Ejemplo Python](https://github.com/Paybook/code-samples/tree/master/curp/webhook/python)
+- Rutina para manejo de peticiones en Webhook: [Ejemplo Python]
 
 ## Primeros Pasos
 
@@ -67,7 +67,7 @@ Por el momento no es necesario definir las otras variables, lo haremos más adel
 
 El webhook requiere de un endpoint público del lado de quien implementa. En este endpoint Paybook Sync envia peticiones HTTP POST que contienen el estado de la solicitud de la CURP. La lógica dentro del endpoint deberá manejar el mensaje que Paybook Sync le envía con la información para la descarga del documento.
 
-Puedes usar el template que te proporcionamos [aquí](https://github.com/Paybook/code-samples/tree/master/curp/webhook/) donde encontraras instrucciones para crear un endpoint de manera local y hacerlo público con [ngrok] para que puedas recibir las peticiones desde Paybook Sync.
+Puedes usar el template que te proporcionamos [aquí][Ejemplo Python] donde encontraras instrucciones para crear un endpoint de manera local y hacerlo público con [ngrok] para que puedas recibir las peticiones desde Paybook Sync.
 
 #### Paso 2.1 Validar funcionamiento de tu Endpoint
 Prueba que tu endpoint pueda procesar peticiones.
@@ -519,5 +519,5 @@ Content codificado de CURP JSON
 [sync-py]: <https://github.com/Paybook/sync-py>
 [dotenv]: <https://pypi.org/project/python-dotenv/>
 [Pipenv]: <https://github.com/pypa/pipenv)>
-
+[Ejemplo Python]: <https://github.com/Paybook/code-samples/tree/master/curp/webhook/python>
 [ngrok]: <https://ngrok.com/>
