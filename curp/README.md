@@ -143,7 +143,7 @@ curl "https://sync.paybook.com/v1/webhooks" -H "Authorization: api_key api_key=<
 }
 ```
 
-Puedes volver a verificar la lista de webhooks como en el [paso 2.2](#paso-2.2-listado-de-webhooks-actuales) y veras una respuesta como esta
+Puedes volver a verificar la lista de webhooks como en el [paso 2.2](#paso-22-listado-de-webhooks-actuales) y veras una respuesta como esta
 
 ```json
 {
