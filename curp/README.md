@@ -1,7 +1,6 @@
 # CURP - RENAPO
 
-- [Requisitos](#requisitos)        
-    - [Requisitos Opcionales](#requisitos-opcionales)    
+- [Requisitos](#requisitos)
 - [Herramientas de testing](#herramientas-de-testing)    
 - [Primeros Pasos](#primeros-pasos)        
     - [Paso 1: Configurar Postman](#paso-1-configurar-postman)                
@@ -28,10 +27,6 @@
 
 - API KEY
 - WEBHOOK
-
-### Requisitos Opcionales
-- [pipenv]
-- [dotenv]
 
 ## Herramientas de testing
 
