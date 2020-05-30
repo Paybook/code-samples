@@ -109,7 +109,7 @@ curl --location --request GET 'https://sync.paybook.com/v1/webhooks' \
 
 **Con Postman:**
 
-Ahora establece el nombre del usuario en el valor actual de la varible ***app_webhook_url*** en la colección ***Sync CURP*** > ... > Edit > Variables <br>
+Ahora establece el url de tu endpoint que te proporciona Ngrok en el valor actual de la varible ***app_webhook_url*** en la colección ***Sync CURP*** > ... > Edit > Variables <br>
 Una vez hecho lo anterior, ejecuta la petición: ***Creates Webhook***
 
 **Con cURL:**
