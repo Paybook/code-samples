@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "bfeddfcc-6a96-458f-bbe1-fcc012a1c5aa",
+		"_postman_id": "b31db9ce-9eb5-4acb-a5f3-852cd16757a0",
 		"name": "Sync CURP",
 		"description": "# Introduction\nWhat does your API do?\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -12,7 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "d8d6e3a9-742e-44b6-8394-0f9b1c5fed7a",
+						"id": "c825dc3d-a7f2-4894-a0f7-3eae49e6f335",
 						"exec": [
 							""
 						],
@@ -22,7 +22,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "79637bb1-9ae9-4b6e-87d8-00cf2374932d",
+						"id": "44742fd8-3471-4fdf-aee5-d1303517a3ad",
 						"exec": [
 							""
 						],
@@ -61,7 +61,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "dc89d460-b2bc-422e-9b98-1316547f7c8c",
+						"id": "86c59563-4dfa-4cb9-909e-5bf3f4095c4f",
 						"exec": [
 							""
 						],
@@ -99,12 +99,12 @@
 			"response": []
 		},
 		{
-			"name": "Webhook",
+			"name": "Creates Webhook",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "b2958bd5-75ae-4180-ae0e-0d5b5c75fdd2",
+						"id": "b55c6936-edd5-4c2a-a863-12a9f8cac2be",
 						"exec": [
 							""
 						],
@@ -151,9 +151,14 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "c9b6b84e-818d-4bd5-b9dc-e1249b2c8832",
+						"id": "09d79c8a-9022-4311-9dbd-1b4be94afe0e",
 						"exec": [
-							""
+							"var jsonData = JSON.parse(responseBody);",
+							"if(jsonData.code === 200){",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    user = jsonData.response;",
+							"    pm.collectionVariables.set(\"sync_id_user\", user.id_user);",
+							"}"
 						],
 						"type": "text/javascript"
 					}
@@ -198,9 +203,14 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "3a5b0728-6235-4a8a-b4ab-f585b2605073",
+						"id": "81faf845-eebd-486d-824e-f5032b1faeec",
 						"exec": [
-							""
+							"var jsonData = JSON.parse(responseBody);",
+							"if(jsonData.code === 200){",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    session = jsonData.response;",
+							"    pm.collectionVariables.set(\"sync_token\", session.token);",
+							"}"
 						],
 						"type": "text/javascript"
 					}
@@ -241,12 +251,12 @@
 			"response": []
 		},
 		{
-			"name": "Create a new job for CURP",
+			"name": "Create a new job for CURP from personal data",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "6448e2c3-a59e-4835-8c6e-9e725ddd6a7c",
+						"id": "45a233a3-f390-4d63-a403-fc933a5a93fe",
 						"exec": [
 							""
 						],
@@ -274,7 +284,59 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"id_site\" : \"{{sync_id_curp_site}}\",\n\t\"input\" : {\n\t\t\"type\" : \"datos\",\n\t\t\"names\" : \"NOMBRE\",\n\t\t\"firstLastname\" : \"APELLIDO PATERNO\",\n\t\t\"secondLastname\" : \"APELLIDO MATERNO\",\n\t\t\"bornDay\" : \"DIA NACIMIENTO\",\n\t\t\"bornMonth\" : \"MES NACIMIENTO\",\n\t\t\"bornYear\" : \"AÑO NACIMIENTO\",\n\t\t\"gender\" : \"GÉNERO\",\n\t\t\"entityCode\" : \"ENTIDAD\"\n\t}\n}"
+					"raw": "{\n\t\"id_site\" : \"{{sync_id_curp_site}}\",\n\t\"input_name\":\"personal_data\",\n\t\"input\" : {\n\t\t\"names\" : \"NOMBRE\",\n\t\t\"firstLastname\" : \"APELLIDO PATERNO\",\n\t\t\"secondLastname\" : \"APELLIDO MATERNO\",\n\t\t\"bornDay\" : \"DIA NACIMIENTO\",\n\t\t\"bornMonth\" : \"MES NACIMIENTO\",\n\t\t\"bornYear\" : \"AÑO NACIMIENTO\",\n\t\t\"gender\" : \"GÉNERO\",\n\t\t\"entityCode\" : \"ENTIDAD\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://sync.paybook.com/v1/jobs",
+					"protocol": "https",
+					"host": [
+						"sync",
+						"paybook",
+						"com"
+					],
+					"path": [
+						"v1",
+						"jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new job for CURP from CURP",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0886ab26-7103-4fb0-8668-c575d79e98b1",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{sync_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id_site\" : \"{{sync_id_curp_site}}\",\n\t\"input_name\":\"Default\",\n\t\"input\" : {\n\t\t\"curp\" : \"[CURP]\"\n\t}\n}"
 				},
 				"url": {
 					"raw": "https://sync.paybook.com/v1/jobs",
@@ -298,7 +360,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "bbcb5bc1-4ae1-4b9d-b37e-bddcb564512e",
+						"id": "1dc37096-f0ac-44ab-9384-9ab317db8a26",
 						"exec": [
 							""
 						],
@@ -330,6 +392,72 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "4e479418-7a20-40ab-943e-8815dee8c588",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "c4e8ba91-d94c-49ff-9129-68dc4d7a1ab0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "154701ef-a3a6-495e-a1d7-946738802b86",
+			"key": "sync_api_key",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "f76e3d67-9f98-4503-8df9-2690e9808561",
+			"key": "app_webhook_url",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "aa09352a-badd-4c51-bc58-8933e3bec1bc",
+			"key": "sync_id_curp_site",
+			"value": "5d4b57e7f9de2a0ad215fba2",
+			"type": "string"
+		},
+		{
+			"id": "b59ae999-2bcb-4323-b045-2cbbc6cdc913",
+			"key": "sync_username",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "c649aa25-c801-4eca-b0c7-b40b768f8031",
+			"key": "sync_id_user",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "c87c9dd4-2486-4d55-878b-85eba10b2e53",
+			"key": "sync_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "66fff72f-4df1-4ae3-9ad5-4dc282bfcf3a",
+			"key": "sync_documents_endpoint",
+			"value": "",
+			"type": "string"
 		}
 	],
 	"protocolProfileBehavior": {}
