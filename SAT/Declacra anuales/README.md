@@ -50,10 +50,10 @@ Las variables se explican a continuación.
 #### Configurar variables de colección en Postman
 
 Ahora configura las variables de la colección estableciendo el valor actual(Current value) de las variables:
-    - ***syncfy_api_key***: Tu API Key
-    - ***syncfy_username***: El nombre que tendrá el usuario que se creara
-    - ***sat_declara_username***: Nombre de usuario (RFC) para el sitio
-    - ***sat_declara_password***: Contraseña para el sitio
+- ***syncfy_api_key***: Tu API Key
+- ***syncfy_username***: El nombre que tendrá el usuario que se creara
+- ***sat_declara_username***: Nombre de usuario (RFC) para el sitio
+- ***sat_declara_password***: Contraseña para el sitio
     
 De la siguiente forma: 
 > ***Syncfy SAT Declara Anuales*** > ... > Edit > Variables <br>
