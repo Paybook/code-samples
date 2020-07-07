@@ -1,4 +1,4 @@
-# SAT - Declara anuales
+# SAT - Declara anuales
 
 - [Requisitos](#requisitos)
 - [Primeros Pasos](#primeros-pasos)        
