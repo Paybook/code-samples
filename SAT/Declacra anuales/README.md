@@ -68,13 +68,13 @@ Solo hace falta ejecutar el request ***Get users linked to an API key***
 #### 2. Crear usuario
 Ejecuta el request ***Creates a new user*** para crear un usuario nuevo
 
-### 3. Iniciar sesión
+#### 3. Iniciar sesión
 Ejecuta el request ***Inits session*** para obtener un token de sesión
 
-### 4. Crear credencial
+#### 4. Crear credencial
 Ejecuta el request ***Create Credential for Sat Declara*** para crear la credencial
 
-### 5. Consultar status de la credencial
+#### 5. Consultar status de la credencial
 Ejecuta el request ***Check credentials sync status Copy*** para obtener el status de la credencial, en la respuesta verás algo similar a esto:
 
 ```json
@@ -111,11 +111,11 @@ Copia el valor del campo _imgBase64File_ y decodifícalo, puedes usar una págin
 
 ![captcha_decoded](./images/convert_base64.png)
 
-### 6. Enviar reto TWOFA
+#### 6. Enviar reto TWOFA
 De la imagen anterior extrae el texto y pégalo en lugar de *<texto_de_imagen>* del campo *customtoken* en la pestaña body de la petición ***Send Twofa challenge***, ahora ejecuta el request.
 
 ![send_twofa](./images/token_texto.png)
 Puedes volver a usar el request del paso anterior [consultar status de la credencial](#4-consultar-status-de-la-credencial) y en la respuesta ahora habrá un "code": 102 que indica que el login ha sido exitoso. Pasado aproximadamente un minuto si volvemos a correr la misma petición ahora habrá un "code": 200 que indica que la conexión ha sido exitosa y la información ya se encuentra disponible.
 
-### 7. Listar transacciones
+#### 7. Listar transacciones
 Ejecuta el request ***Get declaraciones from /transactions*** y en la respuesta estarán listadas las declaraciones anuales para la cuenta que registramos.
