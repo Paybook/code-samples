@@ -1,0 +1,439 @@
+{
+	"info": {
+		"_postman_id": "d9da88cf-8f52-491f-a41a-377c6e3ab487",
+		"name": "Syncfy SAT Declara Anuales",
+		"description": "# Introduction\nThis is a collection with all the minimum steps needed to implement the use case of SAT Declara anuales\n\n# Authentication\nThis collection is configured to use API Key and Token session\n\n# Error Codes\nYou can see the error codes and their menaning in the [official documentation](https://syncfy.com/w/es/sync/public/app/(section:docs/mx/sync/widget/codes)).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get users linked to an API key",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "399b3e4d-8e0d-44ab-bb40-a12a2e0a6850",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "24bc01d3-1d2a-4641-b95d-7c299a17a862",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "api_key api_key={{syncfy_api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://sync.paybook.com/v1/users",
+					"protocol": "https",
+					"host": [
+						"sync",
+						"paybook",
+						"com"
+					],
+					"path": [
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creates a new user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f2682a6c-ea59-4bbd-8176-7977eee213ba",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"if(jsonData.code === 200){",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    user = jsonData.response;",
+							"    pm.collectionVariables.set(\"syncfy_id_user\", user.id_user);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "api_key api_key={{sync_api_key}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"{{syncfy_username}}\"\n}"
+				},
+				"url": {
+					"raw": "https://sync.paybook.com/v1/users",
+					"protocol": "https",
+					"host": [
+						"sync",
+						"paybook",
+						"com"
+					],
+					"path": [
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inits session",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "245852b1-22bd-4a23-91e5-d577e41b428d",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"if(jsonData.code === 200){",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    session = jsonData.response;",
+							"    pm.collectionVariables.set(\"syncfy_token\", session.token);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "api_key api_key={{syncfy_api_key}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id_user\" : \"{{syncfy_id_user}}\"\n}"
+				},
+				"url": {
+					"raw": "https://sync.paybook.com/v1/sessions",
+					"protocol": "https",
+					"host": [
+						"sync",
+						"paybook",
+						"com"
+					],
+					"path": [
+						"v1",
+						"sessions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Credential for Sat Declara",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0e39524-4f00-4f61-b17c-6d6a0be28c0e",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"if(jsonData.code === 200){",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    credential = jsonData.response;",
+							"    pm.collectionVariables.set(\"syncfy_twofa_url\", credential.twofa);",
+							"    pm.collectionVariables.set(\"id_credential\", credential.id_credential);",
+							"    pm.collectionVariables.set(\"syncfy_status_url\", credential.status);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{syncfy_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id_site\" : \"{{syncfy_id_sat_declara_site}}\",\n\t\"credentials\": {\n\t\t\"username\": \"{{sat_declara_username}}\", \n\t\t\"password\": \"{{sat_declara_password}}\"\n\t}, \n\t\"token\": \"{{syncfy_token}}\"\n}"
+				},
+				"url": {
+					"raw": "https://sync.paybook.com/v1/credentials",
+					"protocol": "https",
+					"host": [
+						"sync",
+						"paybook",
+						"com"
+					],
+					"path": [
+						"v1",
+						"credentials"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check credentials sync status Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cb4e8560-becc-4f3a-9c18-72835c3eecc7",
+						"exec": [
+							"",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Checking credentials sync status\"] = jsonData.code === 200;",
+							"",
+							"if(tests[\"Checking credentials sync status\"]){",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    status = jsonData.response;",
+							"}//End of if",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{syncfy_status_url}}?token={{syncfy_token}}",
+					"host": [
+						"{{syncfy_status_url}}"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{syncfy_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Twofa challenge",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "99b1f450-dd7a-4e2d-811f-b7e6509dd500",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{syncfy_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"twofa\" :  {\n         \"customtoken\": \"<texto_de_imagen>\"\n    } \n}"
+				},
+				"url": {
+					"raw": "{{syncfy_twofa_url}}",
+					"host": [
+						"{{syncfy_twofa_url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get declaraciones from /transactions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "589feb1d-9088-47c0-8d28-4429718fa8b8",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{syncfy_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sync.paybook.com/v1/transactions?id_credential={{id_credential}}",
+					"protocol": "https",
+					"host": [
+						"sync",
+						"paybook",
+						"com"
+					],
+					"path": [
+						"v1",
+						"transactions"
+					],
+					"query": [
+						{
+							"key": "id_credential",
+							"value": "{{id_credential}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "7062d9ee-2fe1-476f-bb43-4f44aa093adf",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b1579ae0-ca00-4b5d-b405-8f4701cb8faa",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "c7882a15-9567-4c6c-bc5b-d4115e3fe2bf",
+			"key": "syncfy_api_key",
+			"value": ""
+		},
+		{
+			"id": "0ebd021a-dbe7-4361-92d1-cc22a0b6fcb3",
+			"key": "syncfy_id_sat_declara_site",
+			"value": "59aefe28056f29793a58c091"
+		},
+		{
+			"id": "a1ad148a-8dcd-43b0-aaae-a2001685b970",
+			"key": "syncfy_username",
+			"value": ""
+		},
+		{
+			"id": "1f1b6f84-f630-42d5-90e7-d13ffd48c965",
+			"key": "syncfy_token",
+			"value": ""
+		},
+		{
+			"id": "090e8958-2955-4ed6-ad75-6681f35294ca",
+			"key": "syncfy_id_user",
+			"value": ""
+		},
+		{
+			"id": "d21b8701-accd-4d47-829c-46852f8a168e",
+			"key": "sat_declara_username",
+			"value": ""
+		},
+		{
+			"id": "139933f9-f495-492f-9b77-3284c7a65eed",
+			"key": "sat_declara_password",
+			"value": ""
+		},
+		{
+			"id": "4e39ba8f-70db-43c1-94d9-d7500f917da6",
+			"key": "syncfy_status_url",
+			"value": ""
+		},
+		{
+			"id": "bb62c1fe-0fc5-4738-abdf-1257acd13ed6",
+			"key": "syncfy_twofa_url",
+			"value": ""
+		},
+		{
+			"id": "4e9c7b83-18a6-4701-a1ee-f56c9d708785",
+			"key": "id_credential",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}
