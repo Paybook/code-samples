@@ -26,7 +26,7 @@
 
 ##### Importar colección
 Importa la siguiente colección a postman
-[Colección de peticiones para CURP](<https://github.com/Paybook/code-samples/tree/master/SAT/Declacra anuales/postman>).
+[Colección de peticiones para SAT Declara anuales](<https://github.com/Paybook/code-samples/tree/master/SAT/Declacra anuales/postman>).
 
 Ahora tienes listos los request que usaremos así como las variables que la colección ocupa para cada uno de los request.
 
