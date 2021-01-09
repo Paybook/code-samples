@@ -289,7 +289,7 @@ En la petición ***Create a new job for CURP from CURP*** sustituye el valor de 
 
 Petición:
 ```
-curl -X POST https://sync.paybook.com/v1/jobs -H 'Authorization: Bearer {{sync_token}}' -H 'Content-Type: application/json' -d '"id_site":"5d4b57e7f9de2a0ad215fba2", "input_name":"Default", "input" : { "curp" : "[CURP]" }}'
+curl -X POST https://sync.paybook.com/v1/jobs -H 'Authorization: Bearer {{sync_token}}' -H 'Content-Type: application/json' -d '{"id_site":"5d4b57e7f9de2a0ad215fba2", "input_name":"Default", "input" : { "curp" : "[CURP]" }}'
 ```
 
 Respuesta:
