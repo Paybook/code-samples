@@ -1,4 +1,4 @@
-# SAT - Declara anuales
+# SAT - Declara anuales/mensuales
 
 - [Requisitos](#requisitos)
 - [Primeros Pasos](#primeros-pasos)        
