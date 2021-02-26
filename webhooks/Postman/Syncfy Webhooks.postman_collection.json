@@ -1,0 +1,202 @@
+{
+	"info": {
+		"_postman_id": "262c32c4-c448-4cbc-bf46-eb6a64601510",
+		"name": "Syncfy Webhooks",
+		"description": "A webhook is a HTTP callback to a specified URL. They are triggered each time data is updated in Sync to help you stay up to date with the latest changes.\n\nSyncfy API requires that you setting up a Webhook to your API KEY in order to send these events notification:\n\n    credential_create : New credential was created\n    credential_update : Existing credential was updated\n    refresh : Data for an existing credential was added or updated\n    documents_completed : Data for a document via v1/job has finished",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Webhooks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Got API key Webhooks\"] = jsonData.code === 200;",
+							"",
+							"if(tests[\"Got API key Webhooks\"]){",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    webhooks = jsonData.response;",
+							"    tests[\"Webhooks obtained: \" + webhooks.length] = true;",
+							"    if (webhooks.length) pm.collectionVariables.set(\"id_webhook\", webhooks[webhooks.length-1].id_webhook);",
+							"}//End of if",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "api_key api_key={{sync_api_key}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://api.syncfy.com/v1/webhooks",
+					"protocol": "https",
+					"host": [
+						"api",
+						"syncfy",
+						"com"
+					],
+					"path": [
+						"v1",
+						"webhooks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creates Webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"API key Webhook created\"] = jsonData.code === 200;",
+							"",
+							"if(tests[\"API key Webhook created\"]){",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    webhook = jsonData.response;",
+							"    tests[\" created\"] = true;",
+							"    if (webhook.id_webhook) pm.collectionVariables.set(\"id_webhook\", webhook.id_webhook)",
+							"}//End of if",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "api_key api_key={{sync_api_key}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"api_key\" : \"{{sync_api_key}}\",\n    \"id_user\": \"{{sync_id_user}}\",\n    \"url\" : \"{{your_webhook_url}}\",\n    \"events\" : [\"credential_create\", \"credential_update\", \"refresh\", \"documents_completed\"],\n    \"headers\": {\n        \"X-custom-header\": \"SATTESTER\",\n        \"Y-custom-header\": \"ENVPROD\",\n        \"Z-custom-header\": \"TEST-DECLARA-MENSUAL\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://api.syncfy.com/v1/webhooks",
+					"protocol": "https",
+					"host": [
+						"api",
+						"syncfy",
+						"com"
+					],
+					"path": [
+						"v1",
+						"webhooks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Webhook deleted\"] = responseCode.code === 200;",
+							"postman.clearGlobalVariable(\"id_webhook\");",
+							"pm.collectionVariables.unset(\"id_webhook\")",
+							"tests[\"Postman global data deleted\"] = true;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "api_key api_key={{sync_api_key}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.syncfy.com/v1/webhooks/{{id_webhook}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"syncfy",
+						"com"
+					],
+					"path": [
+						"v1",
+						"webhooks",
+						"{{id_webhook}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "your_webhook_url",
+			"value": "https://29a3a2af8179.ngrok.io/my_webhook"
+		},
+		{
+			"key": "id_webhook",
+			"value": "6038076dbdbbeb33e66d001f"
+		}
+	]
+}
