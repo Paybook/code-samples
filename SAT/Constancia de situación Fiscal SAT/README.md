@@ -59,7 +59,7 @@
     },
     ```
 
-    **3.1 Get documents (PDF and JSON) as encoded strings**
+    **3.1 Get documents (PDF and JSON) as base64 encoded strings**
     Use the enpoint on the first field `"documents"`:
 
     `curl --location --request GET 'https://api.syncfy.com/v1/webhooks/events/31631b46-5ce7-420c-96c2-457b22b3cce3/documents?limit=1000&skip=0' \`
