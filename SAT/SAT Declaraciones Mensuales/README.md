@@ -11,7 +11,7 @@
 ## STEPS
 > The next steps assume that you have at least one [syncfy API user created][syncfy-post-user] and know how to create a [session token][syncfy-post-sesions]. 
 
-1. **Create SAT Declara Mensuales credential with Syncfy Widget**
+1. **Create SAT Declaraciones Mensuales credential with Syncfy Widget**
     
     Use Syncfy Widget to create a new credential, then get `id_credential` from webhook's [credential_create][syncfy-webhook-events] notification.
 
@@ -41,7 +41,7 @@
         "is_deleted": 0,
         "is_disable": 0,
         "is_pending": 0,
-        "description": "Declaración Enero 2021",
+        "description": "Declaracionesción Enero 2021",
         "amount": 0,
         "currency": "MXN",
         "attachments": [
@@ -140,7 +140,7 @@ Output example:
 
 Enviroment | id_site | name 
 ------ | ------ | ------
-Prod   | 58543125784806c3298b4572 | SAT Declara Mensuales
+Prod   | 58543125784806c3298b4572 | SAT Declaraciones Mensuales
 
  [//]: # 
 [syncfy-widget-docs]: <https://syncfy.com/w/en/sync/public/app/(section:docs/mx/sync-tax/widget/overview)>
