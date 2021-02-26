@@ -122,20 +122,6 @@
     Output:
     It would download JSON file attachment
 
-    
-
-4. **GET atachments parsed to JSON**
-
-Same as before but just add `/json` at the end of the endpoint.
-
-Example:
-`curl --location --request GET 'https://api.syncfy.com/v1/attachments/{{id_attachment}}/json'` - [*Refer to API docs*][syncfy-attachments-json-docs]
-
-
-Output example: 
-```json
-
-```
 ### ENVS
 
 Enviroment | id_site | name 
