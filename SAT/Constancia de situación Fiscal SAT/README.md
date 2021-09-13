@@ -13,8 +13,8 @@
 
 1. **Create "Constancia de situación Fiscal" job with Syncfy Widget**
     
-    Use Syncfy Widget to create a new credential, then get `id_credential` from webhook's [credential_create][syncfy-webhook-events] notification.
-
+    Use Syncfy Widget to create a new job.
+    
 2. **Catch webhook documents_completed notification on your webhook server**
 
     You will see a notification like this:
